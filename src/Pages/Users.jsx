@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Axios from "Axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Users = ({ setId }) => {
@@ -13,7 +13,7 @@ const Users = ({ setId }) => {
   
 
   const fetchData = async () => {
-    await Axios
+    await axios
       .get("https://6642ed793c01a059ea20d240.mockapi.io/api/users")
       .then((res) => setUsers(res.data))
       .catch((error) => console.log(error));
@@ -25,7 +25,7 @@ const Users = ({ setId }) => {
   };
   
   const handleDelete = async (id) => {
-    await Axios
+    await axios
       .delete(`https://6642ed793c01a059ea20d240.mockapi.io/api/users/${id}`)
       .then((res) => setDeleteUser(res.data))
       .catch((error) => console.log(error));

@@ -1,4 +1,4 @@
-import Axios from "Axios";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    await Axios
+    await axios
       .get("https://6642ed793c01a059ea20d240.mockapi.io/api/users")
       .then((res) => setUsers(res.data))
       .catch((error) => console.log(error));

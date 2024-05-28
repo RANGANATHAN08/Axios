@@ -51,7 +51,7 @@ const Create = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await Axios
+    await axios
       .post(
         "https://6642ed793c01a059ea20d240.mockapi.io/api/users/",
         createUser
