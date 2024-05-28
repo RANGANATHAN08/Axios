@@ -3,27 +3,30 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Users = ({ setId }) => {
+  //State to set user data when the component gets loaded
   const [users, setUsers] = useState([]);
+  //State to manage user data when a data is deleted
   const [deleteUser, setDeleteUser] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchData(); 
+    fetchData(); //fetch data function will be called whenever deleteUser array gets updated
   }, [deleteUser]);
   
-
+  //function to fetch data from the api
   const fetchData = async () => {
     await axios
       .get("https://6642ed793c01a059ea20d240.mockapi.io/api/users")
       .then((res) => setUsers(res.data))
       .catch((error) => console.log(error));
   };
-
+//Function to set the id of the user in the state to manage id, once the edit button is clicked
+//navigate to edit page
   const handleEdit = (id) => {
     setId(id);
     navigate(`/edit/${id}`);
   };
-  
+  //Function to handle to delete
   const handleDelete = async (id) => {
     await axios
       .delete(`https://6642ed793c01a059ea20d240.mockapi.io/api/users/${id}`)
@@ -77,7 +80,7 @@ const Users = ({ setId }) => {
                 <td>{user.company.bs}</td>
                 <td>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-warning"
                     onClick={() => handleEdit(user.id)}
                   >
                     Edit

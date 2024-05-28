@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Axios from "Axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Edit = ({ id }) => {
@@ -30,36 +30,38 @@ const Edit = ({ id }) => {
   useEffect(() => {
     fetchData();
   }, []);
+  //Function to fetch the data of the user that is to be updated
   const fetchData = async () => {
-    await Axios
+    await axios
       .get(`https://6642ed793c01a059ea20d240.mockapi.io/api/users/${id}`)
       .then((res) => setEditUser(res.data))
       .catch((error) => console.log(error));
   };
-
+  //Function to handle the changes made
   const handleChange = (e) => {
     const { name, value } = e.target; 
     setEditUser((prevUser) => ({
       ...prevUser,
-      [name]: value,
+      [name]: value, //For id, name, username, email, phone, website
       address: {
         ...prevUser.address,
-        [name]: value, 
+        [name]: value, // For street, suite, city, zipcode
         geo: {
           ...prevUser.address.geo,
-          [name]: value, 
+          [name]: value, // For lat, lng
         },
       },
       company: {
         ...prevUser.company,
-        [name]: value,
+        [name]: value, // For company name, catchPhrase, bs
       },
     }));
   };
 
+  //Function to update the edited data in the api
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await Axios
+    await axios
       .put(
         `https://6642ed793c01a059ea20d240.mockapi.io/api/users/${id}`,
         editUser

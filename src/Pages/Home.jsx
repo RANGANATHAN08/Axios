@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Home = () => {
+  //State to set users when the component gets loaded
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
+  // Fetching data from api
   const fetchData = async () => {
     await axios
       .get("https://6642ed793c01a059ea20d240.mockapi.io/api/users")
@@ -35,6 +37,7 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Maping the data fetched from the api to display it in the home page */}
             {users.map((user) => {
               return (
                 <tr key={user.id}>

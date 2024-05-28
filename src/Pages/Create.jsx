@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from "Axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
@@ -28,27 +28,28 @@ const Create = () => {
       bs: "",
     },
   });
-  
+  //Function to set the values typed in the form
   const handleChange = (e) => {
     const { name, value } = e.target; 
     setCreateUser((prevUser) => ({
       ...prevUser,
-      [name]: value, 
+      [name]: value, //For id, name, username, email, phone, website
       address: {
         ...prevUser.address,
-        [name]: value, 
+        [name]: value, // For street, suite, city, zipcode
         geo: {
           ...prevUser.address.geo,
-          [name]: value, 
+          [name]: value, // For lat, lng
         },
       },
       company: {
         ...prevUser.company,
-        [name]: value, 
+        [name]: value, // For company name, catchPhrase, bs
       },
     }));
   };
 
+  //Function to post the new user data created in the api
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
